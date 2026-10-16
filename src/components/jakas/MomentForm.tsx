@@ -32,12 +32,12 @@ export function MomentForm({ host, hostType, initial, onDone }: { host: string; 
     category: initial?.category ?? categories[0] ?? "Music",
   });
   const [image, setImage] = useState(initial?.image ?? "");
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<Partial<Record<"title" | "description" | "location" | "date" | "time" | "price" | "category", string>>>({});
   const set = (k: keyof typeof f) => (e: { target: { value: string } }) => setF({ ...f, [k]: e.target.value });
 
   const onFile = (file?: File) => {
     if (!file) return;
-    if (file.size > 8 * 1024 * 1024) return toast.error("Max 8MB");
+    if (file.size > 8 * 1024 * 1024) { toast.error("Max 8MB"); return; }
     const r = new FileReader();
     r.onload = () => setImage(String(r.result));
     r.readAsDataURL(file);
