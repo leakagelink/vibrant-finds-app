@@ -36,14 +36,14 @@ function Login() {
   const [mode, setMode] = useState<"login" | "signup">("signup");
   const [role, setRole] = useState<"user" | "business" | "admin">("user");
   const [f, setF] = useState({ name: "", email: "", password: "", business: "", type: "", city: "" });
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<Partial<Record<"name" | "email" | "password", string>>>({});
   const navigate = useNavigate();
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const name = mode === "login" && !f.name ? f.email.split("@")[0] : f.name;
     const r = schema.safeParse({ ...f, name });
-    if (!r.success) return setErr(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message])));
+    if (!r.success) { setErr(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message]))); return; }
     const displayName = role === "business" && f.business.trim() ? f.business.trim() : r.data.name;
     if (role === "business" && mode === "signup") actions.registerHost({ name: displayName, type: f.type || "Business", email: r.data.email, city: f.city || "Surampalem" });
     actions.login(displayName, r.data.email, role);

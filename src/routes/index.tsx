@@ -26,7 +26,7 @@ function Home() {
   const [cat, setCat] = useState("All");
 
   const locate = () => {
-    if (!navigator.geolocation) return toast.error("Location not supported");
+    if (!navigator.geolocation) { toast.error("Location not supported"); return; }
     navigator.geolocation.getCurrentPosition(
       (p) => { actions.setLocation({ label: "Near you", lat: p.coords.latitude, lng: p.coords.longitude }); toast.success("Showing moments near you"); },
       () => { actions.setLocation({ label: "Surampalem, AP" }); toast("Permission denied — using Surampalem"); },
