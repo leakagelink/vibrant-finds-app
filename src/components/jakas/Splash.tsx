@@ -11,8 +11,10 @@ export function Splash() {
       setPhase("hidden");
       return;
     }
-    const a = setTimeout(() => setPhase("out"), 2600);
-    const b = setTimeout(() => setPhase("hidden"), 3200);
+    const start = (window as unknown as { __jakasStart?: number }).__jakasStart ?? Date.now();
+    const elapsed = Date.now() - start;
+    const a = setTimeout(() => setPhase("out"), Math.max(0, 2600 - elapsed));
+    const b = setTimeout(() => setPhase("hidden"), Math.max(0, 3200 - elapsed));
     return () => { clearTimeout(a); clearTimeout(b); };
   }, []);
 
