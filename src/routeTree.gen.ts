@@ -10,33 +10,269 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as BusinessRouteImport } from './routes/business'
+import { Route as CreateRouteImport } from './routes/create'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as SavedRouteImport } from './routes/saved'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
+import { Route as AdminFeaturedRouteImport } from './routes/admin.featured'
+import { Route as AdminHostsRouteImport } from './routes/admin.hosts'
+import { Route as AdminModerationRouteImport } from './routes/admin.moderation'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as BusinessIndexRouteImport } from './routes/business.index'
+import { Route as BusinessAnalyticsRouteImport } from './routes/business.analytics'
+import { Route as BusinessCreateRouteImport } from './routes/business.create'
+import { Route as BusinessMomentsRouteImport } from './routes/business.moments'
+import { Route as BusinessProfileRouteImport } from './routes/business.profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessRoute = BusinessRouteImport.update({
+  id: '/business',
+  path: '/business',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateRoute = CreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFeaturedRoute = AdminFeaturedRouteImport.update({
+  id: '/featured',
+  path: '/featured',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminHostsRoute = AdminHostsRouteImport.update({
+  id: '/hosts',
+  path: '/hosts',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminModerationRoute = AdminModerationRouteImport.update({
+  id: '/moderation',
+  path: '/moderation',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const BusinessIndexRoute = BusinessIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessAnalyticsRoute = BusinessAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessCreateRoute = BusinessCreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessMomentsRoute = BusinessMomentsRouteImport.update({
+  id: '/moments',
+  path: '/moments',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessProfileRoute = BusinessProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => BusinessRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/business': typeof BusinessRouteWithChildren
+  '/create': typeof CreateRoute
+  '/explore': typeof ExploreRoute
+  '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/profile': typeof ProfileRoute
+  '/saved': typeof SavedRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/featured': typeof AdminFeaturedRoute
+  '/admin/hosts': typeof AdminHostsRoute
+  '/admin/moderation': typeof AdminModerationRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/business/analytics': typeof BusinessAnalyticsRoute
+  '/business/create': typeof BusinessCreateRoute
+  '/business/moments': typeof BusinessMomentsRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/admin/': typeof AdminIndexRoute
+  '/business/': typeof BusinessIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/create': typeof CreateRoute
+  '/explore': typeof ExploreRoute
+  '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/profile': typeof ProfileRoute
+  '/saved': typeof SavedRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/featured': typeof AdminFeaturedRoute
+  '/admin/hosts': typeof AdminHostsRoute
+  '/admin/moderation': typeof AdminModerationRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/business/analytics': typeof BusinessAnalyticsRoute
+  '/business/create': typeof BusinessCreateRoute
+  '/business/moments': typeof BusinessMomentsRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/admin': typeof AdminIndexRoute
+  '/business': typeof BusinessIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/business': typeof BusinessRouteWithChildren
+  '/create': typeof CreateRoute
+  '/explore': typeof ExploreRoute
+  '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/profile': typeof ProfileRoute
+  '/saved': typeof SavedRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/featured': typeof AdminFeaturedRoute
+  '/admin/hosts': typeof AdminHostsRoute
+  '/admin/moderation': typeof AdminModerationRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/business/analytics': typeof BusinessAnalyticsRoute
+  '/business/create': typeof BusinessCreateRoute
+  '/business/moments': typeof BusinessMomentsRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/admin/': typeof AdminIndexRoute
+  '/business/': typeof BusinessIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/business'
+    | '/create'
+    | '/explore'
+    | '/login'
+    | '/notifications'
+    | '/profile'
+    | '/saved'
+    | '/admin/categories'
+    | '/admin/featured'
+    | '/admin/hosts'
+    | '/admin/moderation'
+    | '/admin/users'
+    | '/business/analytics'
+    | '/business/create'
+    | '/business/moments'
+    | '/business/profile'
+    | '/admin/'
+    | '/business/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/create'
+    | '/explore'
+    | '/login'
+    | '/notifications'
+    | '/profile'
+    | '/saved'
+    | '/admin/categories'
+    | '/admin/featured'
+    | '/admin/hosts'
+    | '/admin/moderation'
+    | '/admin/users'
+    | '/business/analytics'
+    | '/business/create'
+    | '/business/moments'
+    | '/business/profile'
+    | '/admin'
+    | '/business'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/business'
+    | '/create'
+    | '/explore'
+    | '/login'
+    | '/notifications'
+    | '/profile'
+    | '/saved'
+    | '/admin/categories'
+    | '/admin/featured'
+    | '/admin/hosts'
+    | '/admin/moderation'
+    | '/admin/users'
+    | '/business/analytics'
+    | '/business/create'
+    | '/business/moments'
+    | '/business/profile'
+    | '/admin/'
+    | '/business/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  BusinessRoute: typeof BusinessRouteWithChildren
+  CreateRoute: typeof CreateRoute
+  ExploreRoute: typeof ExploreRoute
+  LoginRoute: typeof LoginRoute
+  NotificationsRoute: typeof NotificationsRoute
+  ProfileRoute: typeof ProfileRoute
+  SavedRoute: typeof SavedRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +284,192 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/business': {
+      id: '/business'
+      path: '/business'
+      fullPath: '/business'
+      preLoaderRoute: typeof BusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create': {
+      id: '/create'
+      path: '/create'
+      fullPath: '/create'
+      preLoaderRoute: typeof CreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/categories': {
+      id: '/admin/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AdminCategoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/featured': {
+      id: '/admin/featured'
+      path: '/featured'
+      fullPath: '/admin/featured'
+      preLoaderRoute: typeof AdminFeaturedRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/hosts': {
+      id: '/admin/hosts'
+      path: '/hosts'
+      fullPath: '/admin/hosts'
+      preLoaderRoute: typeof AdminHostsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/moderation': {
+      id: '/admin/moderation'
+      path: '/moderation'
+      fullPath: '/admin/moderation'
+      preLoaderRoute: typeof AdminModerationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/business/': {
+      id: '/business/'
+      path: '/'
+      fullPath: '/business/'
+      preLoaderRoute: typeof BusinessIndexRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/analytics': {
+      id: '/business/analytics'
+      path: '/analytics'
+      fullPath: '/business/analytics'
+      preLoaderRoute: typeof BusinessAnalyticsRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/create': {
+      id: '/business/create'
+      path: '/create'
+      fullPath: '/business/create'
+      preLoaderRoute: typeof BusinessCreateRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/moments': {
+      id: '/business/moments'
+      path: '/moments'
+      fullPath: '/business/moments'
+      preLoaderRoute: typeof BusinessMomentsRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/profile': {
+      id: '/business/profile'
+      path: '/profile'
+      fullPath: '/business/profile'
+      preLoaderRoute: typeof BusinessProfileRouteImport
+      parentRoute: typeof BusinessRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminCategoriesRoute: typeof AdminCategoriesRoute
+  AdminFeaturedRoute: typeof AdminFeaturedRoute
+  AdminHostsRoute: typeof AdminHostsRoute
+  AdminModerationRoute: typeof AdminModerationRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCategoriesRoute: AdminCategoriesRoute,
+  AdminFeaturedRoute: AdminFeaturedRoute,
+  AdminHostsRoute: AdminHostsRoute,
+  AdminModerationRoute: AdminModerationRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface BusinessRouteChildren {
+  BusinessAnalyticsRoute: typeof BusinessAnalyticsRoute
+  BusinessCreateRoute: typeof BusinessCreateRoute
+  BusinessMomentsRoute: typeof BusinessMomentsRoute
+  BusinessProfileRoute: typeof BusinessProfileRoute
+  BusinessIndexRoute: typeof BusinessIndexRoute
+}
+
+const BusinessRouteChildren: BusinessRouteChildren = {
+  BusinessAnalyticsRoute: BusinessAnalyticsRoute,
+  BusinessCreateRoute: BusinessCreateRoute,
+  BusinessMomentsRoute: BusinessMomentsRoute,
+  BusinessProfileRoute: BusinessProfileRoute,
+  BusinessIndexRoute: BusinessIndexRoute,
+}
+
+const BusinessRouteWithChildren = BusinessRoute._addFileChildren(
+  BusinessRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  BusinessRoute: BusinessRouteWithChildren,
+  CreateRoute: CreateRoute,
+  ExploreRoute: ExploreRoute,
+  LoginRoute: LoginRoute,
+  NotificationsRoute: NotificationsRoute,
+  ProfileRoute: ProfileRoute,
+  SavedRoute: SavedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
