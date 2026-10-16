@@ -1,4 +1,4 @@
-import logo from "@/assets/jakas-logo.asset.json";
+import logo from "@/assets/jakas-logo.jpg";
 import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {

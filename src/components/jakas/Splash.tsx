@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logoAsset from "@/assets/jakas-mark.png.asset.json";
+import logoAsset from "@/assets/jakas-mark.png";
 
 export function Splash() {
   // Starts visible so the logo is painted on the very first frame, then hides
