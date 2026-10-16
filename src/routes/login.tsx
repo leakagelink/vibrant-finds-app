@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Briefcase, Shield, User } from "lucide-react";
+import { ArrowLeft, Briefcase, Shield, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -58,6 +58,14 @@ function Login() {
       </div>
       <div className="flex items-center justify-center p-6">
         <form onSubmit={submit} className="w-full max-w-sm space-y-4">
+          <button
+            type="button"
+            onClick={() => (window.history.length > 1 ? window.history.back() : navigate({ to: "/" }))}
+            className="inline-flex items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-sm font-semibold text-foreground"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back
+          </button>
           <Logo className="mx-auto h-24" />
           <div className="grid grid-cols-3 gap-2">
             {roles.map(({ id, label, icon: Icon }) => (

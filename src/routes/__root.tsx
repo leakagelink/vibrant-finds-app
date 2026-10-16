@@ -126,6 +126,24 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   useEffect(() => hydrateStore(), []);
 
+  // Android hardware back button: go back inside the app; exit only from home.
+  useEffect(() => {
+    let remove: (() => void) | undefined;
+    (async () => {
+      const { Capacitor } = await import("@capacitor/core");
+      if (!Capacitor.isNativePlatform()) return;
+      const { App } = await import("@capacitor/app");
+      const handle = await App.addListener("backButton", () => {
+        const path = window.location.pathname;
+        if (path === "/" || path === "/index.html") App.exitApp();
+        else if (window.history.length > 1) window.history.back();
+        else window.location.replace("/");
+      });
+      remove = () => handle.remove();
+    })();
+    return () => remove?.();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
