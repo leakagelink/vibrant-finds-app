@@ -142,3 +142,11 @@
 .splash-word span { background-image: var(--gradient-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .splash-tag { opacity: 0; animation: splash-fade .6s ease-out .8s forwards; }
 .splash-bar { animation: splash-bar 2.4s ease-in-out forwards; }
+@keyframes splash-logo { 0% { opacity: 0; transform: scale(.72) translateY(16px); filter: blur(10px); } 60% { opacity: 1; transform: scale(1.05) translateY(0); filter: blur(0); } 100% { opacity: 1; transform: none; } }
+.splash-logo { opacity: 0; animation: splash-logo .9s cubic-bezier(.2,.9,.3,1.25) .15s forwards; }
+.splash-logo img { filter: drop-shadow(0 10px 30px rgba(255, 77, 109, .35)); }
+@keyframes splash-glow { 0%,100% { opacity: .18; transform: scale(1); } 50% { opacity: .34; transform: scale(1.12); } }
+.splash-glow { animation: splash-glow 3.2s ease-in-out infinite; }
+.splash-seen .jakas-splash { display: none; }
+
+

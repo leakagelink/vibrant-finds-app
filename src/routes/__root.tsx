@@ -110,6 +110,11 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{window.__jakasStart=Date.now();if(sessionStorage.getItem('jakas-splash')){document.documentElement.classList.add('splash-seen');window.__jakasSeen=true}else{sessionStorage.setItem('jakas-splash','1')}}catch(e){}`,
+          }}
+        />
         {children}
         <Scripts />
       </body>
