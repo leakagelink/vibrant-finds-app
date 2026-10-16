@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logoAsset from "@/assets/jakas-mark.png";
+import logoAsset from "@/assets/jakas-mark.png?inline";
 
 export function Splash() {
   // Starts visible so the logo is painted on the very first frame, then hides
@@ -36,8 +36,8 @@ export function Splash() {
             <img
               src={logoAsset}
               alt="JAKAS"
-              width={1335}
-              height={517}
+              width={700}
+              height={271}
               className="h-auto w-full select-none"
               draggable={false}
             />

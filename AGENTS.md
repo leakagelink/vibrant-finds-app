@@ -11,5 +11,5 @@
 
 ## Architecture decisions
 
-- The app is also wrapped as an Android app with Capacitor. The build must stay Capacitor-compatible: `vite.config.ts` uses TanStack Start SPA mode (`spa: { enabled: true }`), `npm run build` copies `_shell.html` to `dist/client/index.html` (scripts/spa-index.mjs), and `capacitor.config.ts` points `webDir` at `dist/client`. Why: Capacitor serves static files only — no SSR/prerender-per-request is possible in the WebView. Logo images are real bundled files in `src/assets/` (never Lovable `.asset.json` pointers), so they load offline in the APK.
+- The app is also wrapped as an Android app with Capacitor. The build must stay Capacitor-compatible: `vite.config.ts` uses TanStack Start SPA mode (`spa: { enabled: true }`), `npm run build` copies `_shell.html` to `dist/client/index.html` (scripts/spa-index.mjs), and `capacitor.config.ts` points `webDir` at `dist/client`. Why: Capacitor serves static files only — no SSR/prerender-per-request is possible in the WebView. Logo images are transparent PNGs in `src/assets/` imported with `?inline` (embedded as data URLs, never `.asset.json` pointers), so they always render in the APK regardless of asset paths.
 - Never name modules `*.client.*` (SSR build rejects them); browser APIs stay inside `useEffect`/handlers per the execution-model rules.
