@@ -147,5 +147,6 @@
 .splash-logo img { filter: drop-shadow(0 10px 30px rgba(255, 77, 109, .35)); }
 @keyframes splash-glow { 0%,100% { opacity: .18; transform: scale(1); } 50% { opacity: .34; transform: scale(1.12); } }
 .splash-glow { animation: splash-glow 3.2s ease-in-out infinite; }
+.splash-seen .jakas-splash { display: none; }
 
 

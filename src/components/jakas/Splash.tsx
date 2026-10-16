@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import logoAsset from "@/assets/jakas-mark.png.asset.json";
 
 export function Splash() {
-  const [phase, setPhase] = useState<"hidden" | "show" | "out">("hidden");
+  // Starts visible so the logo is painted on the very first frame, then hides
+  // itself once the intro has played (or immediately on repeat visits).
+  const [phase, setPhase] = useState<"hidden" | "show" | "out">("show");
 
   useEffect(() => {
-    if (sessionStorage.getItem("jakas-splash")) return;
-    sessionStorage.setItem("jakas-splash", "1");
-    setPhase("show");
+    if ((window as unknown as { __jakasSeen?: boolean }).__jakasSeen) {
+      setPhase("hidden");
+      return;
+    }
     const a = setTimeout(() => setPhase("out"), 2600);
     const b = setTimeout(() => setPhase("hidden"), 3200);
     return () => { clearTimeout(a); clearTimeout(b); };
@@ -18,7 +21,7 @@ export function Splash() {
   return (
     <div
       onClick={() => setPhase("hidden")}
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-brand-dark transition-opacity duration-500 ${phase === "out" ? "opacity-0" : "opacity-100"}`}
+      className={`jakas-splash fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-brand-dark transition-opacity duration-500 ${phase === "out" ? "opacity-0" : "opacity-100"}`}
     >
       <div className="splash-blob absolute -left-24 -top-24 h-80 w-80 rounded-full bg-brand-orange opacity-50 blur-3xl" />
       <div className="splash-blob absolute -bottom-24 -right-16 h-96 w-96 rounded-full bg-brand-purple opacity-60 blur-3xl [animation-delay:-3s]" />
