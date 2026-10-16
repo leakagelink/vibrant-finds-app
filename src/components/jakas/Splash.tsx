@@ -27,9 +27,6 @@ export function Splash() {
       <div className="relative flex w-full flex-col items-center px-8">
         <div className="relative flex w-full items-center justify-center">
           <span className="absolute h-28 w-64 rounded-full bg-brand opacity-25 blur-3xl" />
-          <span className="splash-ripple absolute h-16 w-40 rounded-[999px] border-[3px] border-brand-orange" />
-          <span className="splash-ripple absolute h-16 w-40 rounded-[999px] border-[3px] border-brand-pink [animation-delay:0.7s]" />
-          <span className="splash-ripple absolute h-16 w-40 rounded-[999px] border-[3px] border-brand-purple [animation-delay:1.4s]" />
           <div className="splash-logo relative w-[76%] max-w-[300px]">
             <img
               src={logoAsset.url}
