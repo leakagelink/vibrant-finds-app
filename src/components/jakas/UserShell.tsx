@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Bell, Bookmark, Compass, Home, PlusCircle, User } from "lucide-react";
+import { Bell, Bookmark, Compass, Home, User } from "lucide-react";
 import type { ReactNode } from "react";
 import { useStore } from "@/lib/store";
 import { Logo } from "./Logo";
@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 const tabs = [
   { to: "/", icon: Home, label: "Home" },
   { to: "/explore", icon: Compass, label: "Explore" },
-  { to: "/create", icon: PlusCircle, label: "Post" },
   { to: "/saved", icon: Bookmark, label: "Saved" },
   { to: "/profile", icon: User, label: "Me" },
 ] as const;
@@ -31,11 +30,7 @@ export function UserShell({ children, title }: { children: ReactNode; title?: st
           const active = pathname === to;
           return (
             <Link key={to} to={to} className={cn("flex flex-col items-center gap-0.5 px-3 text-[11px] font-medium", active ? "text-primary" : "text-muted-foreground")}>
-              {to === "/create" ? (
-                <span className="-mt-6 grid h-12 w-12 place-items-center rounded-full bg-brand text-primary-foreground shadow-glow"><Icon className="h-6 w-6" /></span>
-              ) : (
-                <Icon className="h-5 w-5" />
-              )}
+              <Icon className="h-5 w-5" />
               {label}
             </Link>
           );
