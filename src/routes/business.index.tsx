@@ -3,7 +3,7 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { Stat, StatusBadge } from "@/components/jakas/PanelShell";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/business/")({ component: Dashboard });
+export const Route = createFileRoute("/business/")({ head: () => ({ meta: [{ title: 'Host overview — JAKAS' }, { name: "description", content: 'Host overview on JAKAS.' }, { property: "og:title", content: 'Host overview — JAKAS' }, { property: "og:description", content: 'Host overview on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Dashboard });
 
 const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d, i) => ({ d, v: [120, 300, 240, 520, 480, 860, 720][i] }));
 

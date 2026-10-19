@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 import { actions, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/featured")({ component: Featured });
+export const Route = createFileRoute("/admin/featured")({ head: () => ({ meta: [{ title: 'Featured events and alerts — JAKAS' }, { name: "description", content: 'Featured events and alerts on JAKAS.' }, { property: "og:title", content: 'Featured events and alerts — JAKAS' }, { property: "og:description", content: 'Featured events and alerts on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Featured });
 
 function Featured() {
   const moments = useStore((s) => s.moments.filter((m) => m.status === "approved"));

@@ -6,7 +6,7 @@ import { MomentForm } from "@/components/jakas/MomentForm";
 import { StatusBadge } from "@/components/jakas/PanelShell";
 import { actions, useStore, type Moment } from "@/lib/store";
 
-export const Route = createFileRoute("/business/moments")({ component: MyMoments });
+export const Route = createFileRoute("/business/moments")({ head: () => ({ meta: [{ title: 'Host events — JAKAS' }, { name: "description", content: 'Host events on JAKAS.' }, { property: "og:title", content: 'Host events — JAKAS' }, { property: "og:description", content: 'Host events on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: MyMoments });
 
 function MyMoments() {
   const session = useStore((s) => s.session)!;

@@ -7,6 +7,8 @@ import { actions, useStore } from "@/lib/store";
 export const Route = createFileRoute("/notifications")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Notifications — JAKAS" },
       { name: "description", content: "Latest alerts about events and moments near you." },
       { property: "og:title", content: "Notifications — JAKAS" },

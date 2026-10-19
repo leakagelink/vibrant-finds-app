@@ -4,7 +4,7 @@ import { Check, Flag, Trash2, X } from "lucide-react";
 import { StatusBadge } from "@/components/jakas/PanelShell";
 import { actions, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/moderation")({ component: Moderation });
+export const Route = createFileRoute("/admin/moderation")({ head: () => ({ meta: [{ title: 'Content moderation — JAKAS' }, { name: "description", content: 'Content moderation on JAKAS.' }, { property: "og:title", content: 'Content moderation — JAKAS' }, { property: "og:description", content: 'Content moderation on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Moderation });
 
 function Moderation() {
   const moments = useStore((s) => s.moments);

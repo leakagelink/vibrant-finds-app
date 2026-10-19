@@ -3,7 +3,7 @@ import { useState } from "react";
 import { StatusBadge } from "@/components/jakas/PanelShell";
 import { actions, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/users")({ component: UsersPage });
+export const Route = createFileRoute("/admin/users")({ head: () => ({ meta: [{ title: 'Account management — JAKAS' }, { name: "description", content: 'Account management on JAKAS.' }, { property: "og:title", content: 'Account management — JAKAS' }, { property: "og:description", content: 'Account management on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: UsersPage });
 
 function UsersPage() {
   const users = useStore((s) => s.users);

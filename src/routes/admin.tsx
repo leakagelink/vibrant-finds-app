@@ -1,11 +1,12 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { BadgeCheck, LayoutDashboard, Megaphone, ShieldAlert, Tags, Users } from "lucide-react";
 import { PanelShell } from "@/components/jakas/PanelShell";
-import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Admin portal — JAKAS" },
       { name: "description", content: "Moderate content, verify hosts and manage the JAKAS platform." },
       { property: "og:title", content: "Admin portal — JAKAS" },
@@ -25,12 +26,12 @@ const nav = [
 ];
 
 function AdminLayout() {
-  const session = useStore((s) => s.session);
-  if (session?.role !== "admin")
+  const verifiedAccessAvailable = false;
+  if (!verifiedAccessAvailable)
     return (
       <div className="grid min-h-screen place-items-center p-6 text-center">
-        <div><h1 className="mb-2 text-3xl font-bold">Admin access only</h1>
-          <Link to="/login" className="inline-block rounded-full bg-brand px-6 py-3 font-bold text-primary-foreground">Log in as Admin</Link></div>
+        <div><h1 className="mb-2 text-3xl font-bold">Admin access unavailable</h1>
+          <Link to="/" className="inline-block rounded-full bg-brand px-6 py-3 font-bold text-primary-foreground">Back to events</Link></div>
       </div>
     );
   return <PanelShell nav={nav} label="Admin Portal"><Outlet /></PanelShell>;

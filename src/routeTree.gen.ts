@@ -29,6 +29,7 @@ import { Route as BusinessAnalyticsRouteImport } from './routes/business.analyti
 import { Route as BusinessCreateRouteImport } from './routes/business.create'
 import { Route as BusinessMomentsRouteImport } from './routes/business.moments'
 import { Route as BusinessProfileRouteImport } from './routes/business.profile'
+import { Route as MomentsIdRouteImport } from './routes/moments.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -130,6 +131,11 @@ const BusinessProfileRoute = BusinessProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => BusinessRoute,
 } as any)
+const MomentsIdRoute = MomentsIdRouteImport.update({
+  id: '/moments/$id',
+  path: '/moments/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/business/create': typeof BusinessCreateRoute
   '/business/moments': typeof BusinessMomentsRoute
   '/business/profile': typeof BusinessProfileRoute
+  '/moments/$id': typeof MomentsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/business/': typeof BusinessIndexRoute
 }
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/business/create': typeof BusinessCreateRoute
   '/business/moments': typeof BusinessMomentsRoute
   '/business/profile': typeof BusinessProfileRoute
+  '/moments/$id': typeof MomentsIdRoute
   '/admin': typeof AdminIndexRoute
   '/business': typeof BusinessIndexRoute
 }
@@ -193,6 +201,7 @@ export interface FileRoutesById {
   '/business/create': typeof BusinessCreateRoute
   '/business/moments': typeof BusinessMomentsRoute
   '/business/profile': typeof BusinessProfileRoute
+  '/moments/$id': typeof MomentsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/business/': typeof BusinessIndexRoute
 }
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/business/create'
     | '/business/moments'
     | '/business/profile'
+    | '/moments/$id'
     | '/admin/'
     | '/business/'
   fileRoutesByTo: FileRoutesByTo
@@ -237,6 +247,7 @@ export interface FileRouteTypes {
     | '/business/create'
     | '/business/moments'
     | '/business/profile'
+    | '/moments/$id'
     | '/admin'
     | '/business'
   id:
@@ -259,6 +270,7 @@ export interface FileRouteTypes {
     | '/business/create'
     | '/business/moments'
     | '/business/profile'
+    | '/moments/$id'
     | '/admin/'
     | '/business/'
   fileRoutesById: FileRoutesById
@@ -273,6 +285,7 @@ export interface RootRouteChildren {
   NotificationsRoute: typeof NotificationsRoute
   ProfileRoute: typeof ProfileRoute
   SavedRoute: typeof SavedRoute
+  MomentsIdRoute: typeof MomentsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -417,6 +430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessProfileRouteImport
       parentRoute: typeof BusinessRoute
     }
+    '/moments/$id': {
+      id: '/moments/$id'
+      path: '/moments/$id'
+      fullPath: '/moments/$id'
+      preLoaderRoute: typeof MomentsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -470,6 +490,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotificationsRoute: NotificationsRoute,
   ProfileRoute: ProfileRoute,
   SavedRoute: SavedRoute,
+  MomentsIdRoute: MomentsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
