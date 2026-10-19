@@ -57,7 +57,7 @@
   --color-brand-orange: var(--brand-orange);
   --color-brand-pink: var(--brand-pink);
   --color-brand-purple: var(--brand-purple);
-  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -70,8 +70,8 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.985 0.006 330);
-  --foreground: oklch(0.2 0.04 290);
+  --background: oklch(0.995 0.002 20);
+  --foreground: oklch(0.17 0.018 285);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.2 0.04 290);
   --popover: oklch(1 0 0);
@@ -80,20 +80,20 @@
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.95 0.03 320);
   --secondary-foreground: oklch(0.3 0.12 300);
-  --muted: oklch(0.955 0.012 320);
-  --muted-foreground: oklch(0.5 0.04 300);
+  --muted: oklch(0.97 0.006 255);
+  --muted-foreground: oklch(0.59 0.035 260);
   --accent: oklch(0.95 0.04 50);
   --accent-foreground: oklch(0.45 0.16 40);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.65 0.16 155);
   --warning: oklch(0.75 0.16 70);
-  --border: oklch(0.91 0.02 320);
+  --border: oklch(0.92 0.015 260);
   --input: oklch(0.91 0.02 320);
   --ring: oklch(0.63 0.25 5);
-  --brand-orange: oklch(0.7 0.2 45);
-  --brand-pink: oklch(0.63 0.25 5);
-  --brand-purple: oklch(0.52 0.27 295);
+  --brand-orange: oklch(0.7 0.21 38);
+  --brand-pink: oklch(0.65 0.24 15);
+  --brand-purple: oklch(0.61 0.23 290);
   --gradient-brand: linear-gradient(120deg, var(--brand-orange), var(--brand-pink) 50%, var(--brand-purple));
   --gradient-dark: linear-gradient(160deg, oklch(0.22 0.08 300), oklch(0.16 0.06 290));
   --shadow-glow: 0 12px 32px -12px color-mix(in oklab, var(--brand-pink) 55%, transparent);
@@ -150,3 +150,27 @@
 .splash-seen .jakas-splash { display: none; }
 
 
+
+:root {
+  --gradient-action: linear-gradient(110deg, var(--brand-orange), var(--brand-pink));
+  --gradient-photo: linear-gradient(180deg, transparent 25%, oklch(0.13 0.015 285 / 35%) 55%, oklch(0.1 0.015 285) 100%);
+  --photo-overlay: oklch(0.12 0.01 285 / 65%);
+  --sheet-backdrop: oklch(0.15 0.01 285 / 40%);
+  --shadow-nav: 0 4px 24px oklch(0.2 0.01 285 / 12%);
+  --shadow-action: 0 8px 22px color-mix(in oklab, var(--brand-orange) 28%, transparent);
+}
+@utility bg-action { background-image: var(--gradient-action); }
+@utility bg-photo { background-image: var(--gradient-photo); }
+@utility shadow-nav { box-shadow: var(--shadow-nav); }
+@utility shadow-action { box-shadow: var(--shadow-action); }
+@utility bg-photo-overlay { background: var(--photo-overlay); }
+@utility bg-sheet-backdrop { background: var(--sheet-backdrop); }
+body { font-family: var(--font-sans); letter-spacing: 0; }
+h1, h2, h3 { font-weight: 800; letter-spacing: 0; }
+.jakas-app { min-height: 100dvh; }
+.jakas-nav { bottom: max(16px, env(safe-area-inset-bottom)); }
+.discovery-photo { height: min(69dvh, 610px); min-height: 420px; }
+.location-radar { background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 20px 20px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
