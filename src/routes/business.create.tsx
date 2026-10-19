@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { MomentForm } from "@/components/jakas/MomentForm";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/business/create")({ component: CreateBiz });
+export const Route = createFileRoute("/business/create")({ head: () => ({ meta: [{ title: 'Create a host event — JAKAS' }, { name: "description", content: 'Create a host event on JAKAS.' }, { property: "og:title", content: 'Create a host event — JAKAS' }, { property: "og:description", content: 'Create a host event on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: CreateBiz });
 
 function CreateBiz() {
   const session = useStore((s) => s.session)!;

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/business/analytics")({ component: Analytics });
+export const Route = createFileRoute("/business/analytics")({ head: () => ({ meta: [{ title: 'Event engagement — JAKAS' }, { name: "description", content: 'Event engagement on JAKAS.' }, { property: "og:title", content: 'Event engagement — JAKAS' }, { property: "og:description", content: 'Event engagement on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Analytics });
 
 function Analytics() {
   const session = useStore((s) => s.session)!;

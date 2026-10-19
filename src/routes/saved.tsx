@@ -9,6 +9,8 @@ import { isPublicHostMoment } from "@/lib/moment-visibility";
 export const Route = createFileRoute("/saved")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Saved places & events — JAKAS" },
       { name: "description", content: "Your favourite places and saved events on JAKAS." },
       { property: "og:title", content: "Saved — JAKAS" },

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { actions, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/categories")({ component: Cats });
+export const Route = createFileRoute("/admin/categories")({ head: () => ({ meta: [{ title: 'Categories and locations — JAKAS' }, { name: "description", content: 'Categories and locations on JAKAS.' }, { property: "og:title", content: 'Categories and locations — JAKAS' }, { property: "og:description", content: 'Categories and locations on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Cats });
 
 function Editor({ title, items, onAdd, onRemove }: { title: string; items: string[]; onAdd: (v: string) => void; onRemove: (v: string) => void }) {
   const [v, setV] = useState("");

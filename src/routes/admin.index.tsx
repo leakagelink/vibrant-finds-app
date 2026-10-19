@@ -3,7 +3,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { Stat } from "@/components/jakas/PanelShell";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/")({ component: AdminHome });
+export const Route = createFileRoute("/admin/")({ head: () => ({ meta: [{ title: 'Admin overview — JAKAS' }, { name: "description", content: 'Admin overview on JAKAS.' }, { property: "og:title", content: 'Admin overview — JAKAS' }, { property: "og:description", content: 'Admin overview on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: AdminHome });
 
 const data = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d, i) => ({ d, Events: [40, 60, 55, 90, 120, 160, 140][i], Users: [80, 120, 140, 180, 220, 300, 280][i] }));
 

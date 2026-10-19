@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { StatusBadge } from "@/components/jakas/PanelShell";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/business/profile")({ component: BizProfile });
+export const Route = createFileRoute("/business/profile")({ head: () => ({ meta: [{ title: 'Host business profile — JAKAS' }, { name: "description", content: 'Host business profile on JAKAS.' }, { property: "og:title", content: 'Host business profile — JAKAS' }, { property: "og:description", content: 'Host business profile on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: BizProfile });
 
 function BizProfile() {
   const session = useStore((s) => s.session)!;

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { StatusBadge } from "@/components/jakas/PanelShell";
 import { actions, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/hosts")({ component: Hosts });
+export const Route = createFileRoute("/admin/hosts")({ head: () => ({ meta: [{ title: 'Host verification — JAKAS' }, { name: "description", content: 'Host verification on JAKAS.' }, { property: "og:title", content: 'Host verification — JAKAS' }, { property: "og:description", content: 'Host verification on JAKAS.' }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Hosts });
 
 function Hosts() {
   const hosts = useStore((s) => s.hosts);
