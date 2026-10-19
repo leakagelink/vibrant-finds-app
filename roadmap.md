@@ -1,6 +1,8 @@
 # JAKAS final MVP
 
-Blocked: Cloud activation was denied because the workspace has no remaining credits. Core implementation and live verification await credit replenishment and successful Cloud activation; phone OTP and push provider configuration must then be checked. No application functionality has changed.
+Blocked: Cloud activation was denied because the workspace has no remaining credits. Server-backed implementation awaits credit replenishment and successful Cloud activation; phone OTP and push provider configuration must then be checked.
+
+- [x] Remove ordinary-user posting from navigation, profile and the legacy create page. Server-enforced host-only permissions remain blocked on Cloud.
 
 - [ ] Enable Cloud and verify phone OTP setup.
 - [ ] Centralize profiles, host verification, moments, engagement, reports, service areas and audit history.
