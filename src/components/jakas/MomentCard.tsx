@@ -1,96 +1,25 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Bookmark, Calendar, Flag, Heart, MapPin, MessageCircle, Send, Share2 } from "lucide-react";
-import { toast } from "sonner";
-import { actions, useStore, type Moment } from "@/lib/store";
-import { cn } from "@/lib/utils";
+import { ArrowUp, Heart, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import type { Moment } from "@/lib/store";
+import { EventSheet, categoryEmoji, eventDate, shareEvent } from "./EventSheet";
 
-export function MomentCard({ m }: { m: Moment }) {
-  const liked = useStore((s) => s.liked.includes(m.id));
-  const saved = useStore((s) => s.saved.includes(m.id));
-  const session = useStore((s) => s.session);
+export function MomentCard({ m, drop = false, compact = false }: { m: Moment; drop?: boolean; compact?: boolean }) {
   const [open, setOpen] = useState(false);
-  const [text, setText] = useState("");
-
-  const share = async () => {
-    actions.share(m.id);
-    const url = window.location.origin + "/moments/" + encodeURIComponent(m.id);
-    try {
-      if (navigator.share) await navigator.share({ title: m.title, text: m.description, url });
-      else {
-        await navigator.clipboard.writeText(url);
-        toast.success("Link copied");
-      }
-    } catch {
-      /* cancelled */
-    }
-  };
-
-  return (
-    <article className="overflow-hidden rounded-3xl border bg-card shadow-sm">
-      <div className="relative">
-        <img src={m.image} alt={m.title} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-        <span className="absolute left-3 top-3 rounded-full bg-brand px-3 py-1 text-xs font-bold text-primary-foreground shadow-glow">
-          {m.featured ? "★ Featured" : m.category}
-        </span>
-        <Button
-          variant="secondary" size="icon" disabled title="Phone verification is not connected"
-          aria-label="Interested unavailable"
-          className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-card/90 backdrop-blur"
-        >
-          <Bookmark className={cn("h-4 w-4", saved && "fill-primary text-primary")} />
-        </Button>
-      </div>
-      <div className="space-y-2 p-4">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-xl font-bold leading-tight"><Link to="/moments/$id" params={{ id: m.id }}>{m.title}</Link></h3>
-          <span className="shrink-0 rounded-full bg-accent px-2.5 py-0.5 text-sm font-semibold text-accent-foreground">{m.price}</span>
-        </div>
-        <p className="text-sm text-muted-foreground">{m.description}</p>
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-primary" />{m.location} · {m.distanceKm} km</span>
-          <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5 text-brand-purple" />{new Date(m.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })} · {m.time}</span>
-        </div>
-        <p className="text-xs">by <span className="font-semibold">{m.host}</span></p>
-        <div className="flex items-center gap-1 border-t pt-2">
-          <button onClick={() => actions.toggleLike(m.id)} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm hover:bg-muted">
-            <Heart className={cn("h-4 w-4", liked && "fill-primary text-primary")} />{m.likes}
-          </button>
-          <button onClick={() => setOpen((o) => !o)} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm hover:bg-muted">
-            <MessageCircle className="h-4 w-4" />{m.comments.length}
-          </button>
-          <button onClick={share} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm hover:bg-muted">
-            <Share2 className="h-4 w-4" />{m.shares}
-          </button>
-          <Button
-            variant="ghost" size="icon" disabled title="Phone verification is not connected"
-            className="ml-auto rounded-full p-2 text-muted-foreground hover:bg-muted" aria-label="Report unavailable"
-          >
-            <Flag className="h-4 w-4" />
-          </Button>
-        </div>
-        {open && (
-          <div className="space-y-2 pt-1">
-            {m.comments.map((c) => (
-              <p key={c.id} className="text-sm"><span className="font-semibold">{c.user}</span> {c.text}</p>
-            ))}
-            <form
-              className="flex gap-2"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const t = text.trim().slice(0, 300);
-                if (!t) return;
-                actions.comment(m.id, session?.name ?? "Guest", t);
-                setText("");
-              }}
-            >
-              <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Add a comment…" className="flex-1 rounded-full border bg-muted px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-ring" />
-              <button className="grid h-9 w-9 place-items-center rounded-full bg-brand text-primary-foreground" aria-label="Send"><Send className="h-4 w-4" /></button>
-            </form>
-          </div>
-        )}
-      </div>
-    </article>
-  );
+  return <>
+    {compact ? <article className="overflow-hidden rounded-[22px] bg-card shadow-nav">
+      <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3"><img src={m.image} alt={m.title} className="h-28 w-full object-cover" /><div className="min-w-0 py-3 pr-3"><span className="text-[10px] font-extrabold text-brand-orange">{categoryEmoji(m.category)} {m.category}</span><h3 className="mt-1 text-sm font-extrabold"><Link to="/moments/$id" params={{ id: m.id }}>{m.title}</Link></h3><p className="mt-1 truncate text-xs text-muted-foreground">{m.host}</p><p className="mt-2 text-[10px] text-muted-foreground">🗓️ {eventDate(m.date)} · {m.time} IST</p></div></div>
+      <div className="flex items-center justify-between bg-muted/50 px-4 py-2"><span className="text-xs text-muted-foreground">📍 {m.distanceKm} km away</span><Button variant="ink" size="sm" className="rounded-full" onClick={() => setOpen(true)}>Open →</Button></div>
+    </article> : drop ? <article className="overflow-hidden rounded-[26px] bg-card shadow-nav">
+      <div className="relative"><img src={m.image} alt={m.title} className="aspect-[6/5] w-full object-cover" /><span className="absolute left-3 top-3 rounded-full bg-brand-purple px-3 py-1.5 text-xs font-bold text-primary-foreground">{eventDate(m.date)}</span><span className="absolute bottom-3 right-3 rounded-full bg-photo-overlay px-3 py-1.5 text-xs text-primary-foreground">📍 {m.distanceKm} km</span></div>
+      <div className="p-4"><span className="rounded-full bg-brand-purple/10 px-3 py-1 text-[11px] font-bold text-brand-purple">{categoryEmoji(m.category)} {m.category}</span><h2 className="mt-3 text-xl font-extrabold leading-tight"><Link to="/moments/$id" params={{ id: m.id }}>{m.title}</Link></h2><p className="mt-1 text-xs font-medium text-muted-foreground">{m.host} · {m.location}</p><p className="mt-2 text-xs italic leading-5 text-muted-foreground">{m.description}</p><div className="my-3 flex gap-2 text-[11px] font-semibold text-muted-foreground"><span className="rounded-full bg-muted px-3 py-2">🗓️ {eventDate(m.date)}</span><span className="rounded-full bg-muted px-3 py-2">🕘 {m.time} IST</span></div><span className="inline-block rounded-lg bg-brand-purple px-3 py-2 text-xs font-bold text-primary-foreground">{m.price}</span><div className="mt-4 grid grid-cols-[minmax(0,1fr)_44px] gap-2"><Button variant="ink" className="h-12" onClick={() => setOpen(true)}>View Drop →</Button><Button variant="outline" size="icon" className="h-12 w-11 rounded-2xl" aria-label="Share event" onClick={() => shareEvent(m)}><Share2 /></Button></div></div>
+    </article> : <article className="discovery-photo relative isolate overflow-hidden rounded-[28px] bg-foreground shadow-nav">
+      <img src={m.image} alt={m.title} className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-photo" />
+      <div className="absolute left-4 right-4 top-4 flex justify-between gap-2"><span className="rounded-full bg-photo-overlay px-3 py-1.5 text-[11px] font-bold text-primary-foreground">{categoryEmoji(m.category)} {m.category}</span><span className="rounded-full bg-photo-overlay px-3 py-1.5 text-[11px] font-semibold text-primary-foreground">🗓️ {eventDate(m.date)}</span></div>
+      <div className="absolute inset-x-0 bottom-0 p-5 text-primary-foreground"><div className="mb-2 flex items-center gap-2 text-xs"><span className="rounded-full bg-card/20 px-3 py-1 font-semibold">{categoryEmoji(m.category)} {m.category}</span><span className="opacity-80">📍 {m.distanceKm} km away</span></div><h2 className="text-2xl font-extrabold leading-tight"><Link to="/moments/$id" params={{ id: m.id }}>{m.title}</Link></h2><p className="mt-1 text-xs font-semibold opacity-70">{m.host} · {m.location}</p><span className="mt-3 inline-block rounded-full bg-action px-3 py-1.5 text-[11px] font-bold">{m.price}</span><div className="mt-3 flex gap-2"><Button variant="action" disabled className="rounded-full" title="Phone verification is not connected"><Heart />I'm In</Button><Button variant="ghost" size="icon" className="rounded-full hover:bg-card/20" aria-label="Share event" onClick={() => shareEvent(m)}><Share2 /></Button></div><Button variant="ghost" className="mt-2 h-7 w-full text-[10px] text-primary-foreground/60 hover:bg-card/10 hover:text-primary-foreground" onClick={() => setOpen(true)}><ArrowUp className="h-3 w-3" />View details</Button></div>
+    </article>}
+    {open && <EventSheet moment={m} drop={drop} onClose={() => setOpen(false)} />}
+  </>;
 }

@@ -1,36 +1,31 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Bell, Bookmark, Compass, Home, User } from "lucide-react";
+import { UserRound } from "lucide-react";
 import type { ReactNode } from "react";
-import { useStore } from "@/lib/store";
-import { Logo } from "./Logo";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { to: "/", icon: Home, label: "Home" },
-  { to: "/explore", icon: Compass, label: "Explore" },
-  { to: "/saved", icon: Bookmark, label: "Saved" },
-  { to: "/profile", icon: User, label: "Me" },
+  { to: "/", emoji: "🔥", label: "Discover" },
+  { to: "/saved", emoji: "⭐", label: "My JAKAS" },
+  { to: "/explore", emoji: "🚀", label: "Drops" },
 ] as const;
 
-export function UserShell({ children, title }: { children: ReactNode; title?: string }) {
+export function UserShell({ children, title = "✨ Tonight looks exciting", subtitle = "Experiences near you", hideHeader = false }: { children: ReactNode; title?: string; subtitle?: string; hideHeader?: boolean }) {
   const { pathname } = useLocation();
-  const unread = useStore((s) => s.notices.filter((n) => !n.read).length);
   return (
-    <div className="mx-auto min-h-screen max-w-md bg-background pb-24 md:border-x">
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b bg-background/90 px-4 py-2 backdrop-blur">
-        {title ? <h1 className="text-2xl font-bold">{title}</h1> : <Logo className="h-11" />}
-        <Link to="/notifications" className="relative grid h-10 w-10 place-items-center rounded-full bg-muted" aria-label="Notifications">
-          <Bell className="h-5 w-5" />
-          {unread > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 w-5 place-items-center rounded-full bg-brand text-[10px] font-bold text-primary-foreground">{unread}</span>}
+    <div className="jakas-app mx-auto max-w-md bg-background pb-28 md:border-x">
+      {!hideHeader && <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 pb-3 pt-7">
+        <div className="min-w-0"><h1 className="text-xl font-extrabold leading-tight">{title}</h1><p className="mt-1 text-xs font-medium text-muted-foreground">{subtitle}</p></div>
+        <Link to="/profile" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-brand-orange bg-secondary text-secondary-foreground" aria-label="My profile">
+          <UserRound className="h-5 w-5" />
         </Link>
-      </header>
-      <main className="px-4 py-4">{children}</main>
-      <nav className="fixed inset-x-0 bottom-0 z-20 mx-auto flex max-w-md justify-around border-t bg-card/95 py-2 backdrop-blur">
-        {tabs.map(({ to, icon: Icon, label }) => {
+      </header>}
+      <main className="px-4 py-1">{children}</main>
+      <nav aria-label="Main navigation" className="jakas-nav fixed inset-x-5 z-40 mx-auto grid max-w-[408px] grid-cols-3 rounded-[28px] border bg-card/95 px-3 py-2 shadow-nav backdrop-blur">
+        {tabs.map(({ to, emoji, label }) => {
           const active = pathname === to;
           return (
-            <Link key={to} to={to} className={cn("flex flex-col items-center gap-0.5 px-3 text-[11px] font-medium", active ? "text-primary" : "text-muted-foreground")}>
-              <Icon className="h-5 w-5" />
+            <Link key={to} to={to} aria-current={active ? "page" : undefined} className={cn("flex flex-col items-center gap-1 text-[10px] font-bold", active ? "text-brand-orange" : "text-muted-foreground")}>
+              <span className={cn("grid h-10 w-10 place-items-center rounded-full text-xl", active ? "bg-action shadow-action" : "bg-muted")}>{emoji}</span>
               {label}
             </Link>
           );
