@@ -1,12 +1,12 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { UserRound } from "lucide-react";
+import { Flame, Rocket, Star, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { to: "/", emoji: "🔥", label: "Discover" },
-  { to: "/saved", emoji: "⭐", label: "My JAKAS" },
-  { to: "/explore", emoji: "🚀", label: "Drops" },
+  { to: "/", icon: Flame, label: "Discover" },
+  { to: "/saved", icon: Star, label: "My JAKAS" },
+  { to: "/explore", icon: Rocket, label: "Drops" },
 ] as const;
 
 export function UserShell({ children, title = "✨ Tonight looks exciting", subtitle = "Experiences near you", hideHeader = false }: { children: ReactNode; title?: string; subtitle?: string; hideHeader?: boolean }) {
@@ -21,11 +21,11 @@ export function UserShell({ children, title = "✨ Tonight looks exciting", subt
       </header>}
       <main className="px-4 py-1">{children}</main>
       <nav aria-label="Main navigation" className="jakas-nav fixed inset-x-5 z-40 mx-auto grid max-w-[408px] grid-cols-3 rounded-[28px] border bg-card/95 px-3 py-2 shadow-nav backdrop-blur">
-        {tabs.map(({ to, emoji, label }) => {
+        {tabs.map(({ to, icon: Icon, label }) => {
           const active = pathname === to;
           return (
-            <Link key={to} to={to} aria-current={active ? "page" : undefined} className={cn("flex flex-col items-center gap-1 text-[10px] font-bold", active ? "text-brand-orange" : "text-muted-foreground")}>
-              <span className={cn("grid h-10 w-10 place-items-center rounded-full text-xl", active ? "bg-action shadow-action" : "bg-muted")}>{emoji}</span>
+            <Link key={to} to={to} aria-label={label} aria-current={active ? "page" : undefined} className={cn("flex flex-col items-center gap-1 text-[10px] font-bold", active ? "text-brand-orange" : "text-muted-foreground")}>
+              <span className={cn("grid h-10 w-10 place-items-center rounded-full", active ? "bg-action text-primary-foreground shadow-action" : "bg-muted text-warning")}><Icon aria-hidden="true" className="h-5 w-5" /></span>
               {label}
             </Link>
           );

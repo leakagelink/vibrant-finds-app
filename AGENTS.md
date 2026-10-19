@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Architecture decisions
+- User screens share `UserShell` for the three-tab navigation and `EventContent`/`EventSheet` for detail views; dialog primitives manage focus and dismissal so presentation stays consistent and accessible.
 
 - Public event details use `/moments/$id` for card navigation and sharing; only approved host events render there, keeping direct links consistent with discovery. Local display filtering is not a server authorization boundary.
 - Until verified server authentication exists, login must not create simulated sessions and host/admin panels remain unavailable; client-stored roles must never unlock privileged tools.
