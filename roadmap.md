@@ -6,6 +6,7 @@ Blocked: Cloud activation was denied because the workspace has no remaining cred
 - [x] Add public event detail links, missing-event state, maps directions, native sharing and discovery price filters. Phone-verified actions remain unavailable, not simulated.
 - [x] Remove simulated login and self-selected admin access; keep privileged panels unavailable until server verification is connected.
 - [x] Apply uploaded Figma visual direction to location welcome/denied, Discover, phone login, My JAKAS, event sheets and Drops. Mobile/desktop browsing and dialog navigation verified. Real OTP screen, attendance, verified badges and countdowns await Cloud; mock counts are not copied.
+- [ ] Correct rejected Discover layout to a viewport-fitting left/right swipe deck; refine screenshot proportions and shared animations, then verify gestures and details in the browser.
 
 - [ ] Enable Cloud and verify phone OTP setup.
 - [ ] Centralize profiles, host verification, moments, engagement, reports, service areas and audit history.
