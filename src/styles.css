@@ -57,8 +57,8 @@
   --color-brand-orange: var(--brand-orange);
   --color-brand-pink: var(--brand-pink);
   --color-brand-purple: var(--brand-purple);
-  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Noto Color Emoji", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Noto Color Emoji", system-ui, sans-serif;
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
