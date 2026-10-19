@@ -1,5 +1,7 @@
 # JAKAS final MVP
 
+Blocked: Cloud activation was denied because the workspace has no remaining credits. Core implementation and live verification await credit replenishment and successful Cloud activation; phone OTP and push provider configuration must then be checked. No application functionality has changed.
+
 - [ ] Enable Cloud and verify phone OTP setup.
 - [ ] Centralize profiles, host verification, moments, engagement, reports, service areas and audit history.
 - [ ] Implement guest discovery, today-only time filters, distance/price filters and moment details/deep links.
