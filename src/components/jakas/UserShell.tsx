@@ -1,13 +1,13 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Flame, Rocket, Star, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const tabs = [
-  { to: "/", icon: Flame, label: "Discover" },
-  { to: "/saved", icon: Star, label: "My JAKAS" },
-  { to: "/explore", icon: Rocket, label: "Drops" },
+  { to: "/", label: "Discover" },
+  { to: "/saved", label: "My JAKAS" },
+  { to: "/explore", label: "Drops" },
 ] as const;
 
 export function UserShell({ children, title = "✨ Tonight looks exciting", subtitle = "Experiences near you", hideHeader = false, immersive = false, onLocationClick }: { children: ReactNode; title?: string; subtitle?: string; hideHeader?: boolean; immersive?: boolean; onLocationClick?: () => void }) {
@@ -22,7 +22,7 @@ export function UserShell({ children, title = "✨ Tonight looks exciting", subt
       </header>}
       <main className={cn("px-4 py-1", immersive && "discover-main")}>{children}</main>
       <nav aria-label="Main navigation" className="jakas-nav fixed inset-x-5 z-40 mx-auto grid max-w-[408px] grid-cols-3 rounded-[28px] border bg-card/95 px-3 py-2 shadow-nav backdrop-blur">
-        {tabs.map(({ to, icon: Icon, label }) => {
+        {tabs.map(({ to, label }) => {
           const active = pathname === to;
           return (
             <Link key={to} to={to} aria-label={label} aria-current={active ? "page" : undefined} className={cn("flex flex-col items-center gap-1 text-[10px] font-bold", active ? "text-brand-orange" : "text-muted-foreground")}>
