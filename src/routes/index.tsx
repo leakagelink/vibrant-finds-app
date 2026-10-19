@@ -13,6 +13,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "See what's happening near you: live events, food, music and activities." },
       { property: "og:title", content: "JAKAS — What's happening, right now" },
       { property: "og:description", content: "Discover nearby events, moments and activities." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
@@ -34,7 +36,7 @@ function Home() {
   };
 
   const live = moments
-    .filter((m) => m.status === "approved" && (cat === "All" || m.category === cat))
+    .filter((m) => m.status === "approved" && m.hostType === "business" && (cat === "All" || m.category === cat))
     .sort((a, b) => a.distanceKm - b.distanceKm);
   const featured = live.filter((m) => m.featured);
 

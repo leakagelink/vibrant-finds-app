@@ -3,6 +3,7 @@
 Blocked: Cloud activation was denied because the workspace has no remaining credits. Server-backed implementation awaits credit replenishment and successful Cloud activation; phone OTP and push provider configuration must then be checked.
 
 - [x] Remove ordinary-user posting from navigation, profile and the legacy create page. Server-enforced host-only permissions remain blocked on Cloud.
+- [x] Add public event detail links, missing-event state, maps directions, native sharing and discovery price filters. Phone-verified actions remain unavailable, not simulated.
 
 - [ ] Enable Cloud and verify phone OTP setup.
 - [ ] Centralize profiles, host verification, moments, engagement, reports, service areas and audit history.

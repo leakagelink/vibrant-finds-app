@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { UserShell } from "@/components/jakas/UserShell";
 import { MomentCard } from "@/components/jakas/MomentCard";
 import { useStore } from "@/lib/store";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
@@ -12,6 +13,8 @@ export const Route = createFileRoute("/explore")({
       { name: "description", content: "Search nearby posts, events and places on JAKAS." },
       { property: "og:title", content: "Explore nearby events — JAKAS" },
       { property: "og:description", content: "Search nearby posts, events and places." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Explore,
@@ -21,9 +24,11 @@ function Explore() {
   const moments = useStore((s) => s.moments);
   const [q, setQ] = useState("");
   const [radius, setRadius] = useState(10);
+  const [price, setPrice] = useState("All");
   const needle = q.toLowerCase();
   const results = moments.filter(
-    (m) => m.status === "approved" && m.distanceKm <= radius &&
+    (m) => m.status === "approved" && m.hostType === "business" && m.distanceKm <= radius &&
+      (price === "All" || (price === "Free" ? m.price.toLowerCase() === "free" : m.price.toLowerCase() !== "free")) &&
       [m.title, m.location, m.category, m.host].some((x) => x.toLowerCase().includes(needle)),
   );
   return (
@@ -35,9 +40,10 @@ function Explore() {
       <div className="mb-4 flex items-center gap-3 text-sm">
         <span className="text-muted-foreground">Within</span>
         {[1, 5, 10, 25].map((r) => (
-          <button key={r} onClick={() => setRadius(r)} className={`rounded-full px-3 py-1 ${radius === r ? "bg-brand text-primary-foreground" : "bg-muted"}`}>{r} km</button>
+          <Button key={r} size="sm" variant={radius === r ? "default" : "secondary"} aria-pressed={radius === r} onClick={() => setRadius(r)}>{r} km</Button>
         ))}
       </div>
+      <div className="mb-4 flex gap-2" aria-label="Price filter">{["All", "Free", "Paid"].map((p) => <Button key={p} size="sm" variant={price === p ? "default" : "outline"} aria-pressed={price === p} onClick={() => setPrice(p)}>{p}</Button>)}</div>
       <div className="space-y-4">
         {results.map((m) => <MomentCard key={m.id} m={m} />)}
         {results.length === 0 && <p className="py-10 text-center text-muted-foreground">No matches nearby.</p>}

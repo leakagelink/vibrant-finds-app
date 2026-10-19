@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Bookmark, Calendar, Flag, Heart, MapPin, MessageCircle, Send, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { actions, useStore, type Moment } from "@/lib/store";
@@ -13,7 +14,7 @@ export function MomentCard({ m }: { m: Moment }) {
 
   const share = async () => {
     actions.share(m.id);
-    const url = typeof window !== "undefined" ? window.location.origin + "/?m=" + m.id : "";
+    const url = window.location.origin + "/moments/" + encodeURIComponent(m.id);
     try {
       if (navigator.share) await navigator.share({ title: m.title, text: m.description, url });
       else {
@@ -42,7 +43,7 @@ export function MomentCard({ m }: { m: Moment }) {
       </div>
       <div className="space-y-2 p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-xl font-bold leading-tight">{m.title}</h3>
+          <h3 className="text-xl font-bold leading-tight"><Link to="/moments/$id" params={{ id: m.id }}>{m.title}</Link></h3>
           <span className="shrink-0 rounded-full bg-accent px-2.5 py-0.5 text-sm font-semibold text-accent-foreground">{m.price}</span>
         </div>
         <p className="text-sm text-muted-foreground">{m.description}</p>
