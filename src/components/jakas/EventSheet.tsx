@@ -41,8 +41,8 @@ export function EventContent({ moment, drop = false }: { moment: Moment; drop?: 
 
 export function EventSheet({ moment, drop = false, onClose }: { moment: Moment; drop?: boolean; onClose: () => void }) {
   return <Dialog.Root open onOpenChange={(open) => { if (!open) onClose(); }}><Dialog.Portal>
-    <Dialog.Overlay className="fixed inset-0 z-50 bg-sheet-backdrop" />
-    <Dialog.Content aria-describedby={undefined} className="fixed bottom-0 left-1/2 z-50 max-h-[88dvh] w-full max-w-md -translate-x-1/2 overflow-y-auto rounded-t-[30px] bg-card px-5 pb-8 pt-8 shadow-nav">
+    <Dialog.Overlay className="event-backdrop fixed inset-0 z-50 bg-sheet-backdrop" />
+    <Dialog.Content aria-describedby={undefined} className="event-sheet fixed bottom-0 left-1/2 z-50 max-h-[88dvh] w-full max-w-md -translate-x-1/2 overflow-y-auto rounded-t-[30px] bg-card px-5 pb-8 pt-8 shadow-nav">
       <Dialog.Title className="sr-only">{moment.title}</Dialog.Title>
       <span className="absolute left-1/2 top-3 h-1 w-9 -translate-x-1/2 rounded-full bg-border" />
       <Button autoFocus variant="ghost" size="icon" aria-label="Close event details" className="absolute right-3 top-1 z-10 h-7 w-7 rounded-full" onClick={onClose}><X /></Button>
