@@ -10,10 +10,10 @@ import { isPublicHostMoment } from "@/lib/moment-visibility";
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
-      { title: "Explore nearby events — JAKAS" },
-      { name: "description", content: "Search nearby posts, events and places on JAKAS." },
-      { property: "og:title", content: "Explore nearby events — JAKAS" },
-      { property: "og:description", content: "Search nearby posts, events and places." },
+      { title: "Drops — Upcoming experiences on JAKAS" },
+      { name: "description", content: "Discover event offers, dates and locations near you on JAKAS." },
+      { property: "og:title", content: "Drops — Upcoming experiences on JAKAS" },
+      { property: "og:description", content: "Browse experiences and event offers near you." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

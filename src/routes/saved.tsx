@@ -11,9 +11,9 @@ export const Route = createFileRoute("/saved")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { title: "Saved places & events — JAKAS" },
+      { title: "My JAKAS — Your saved experiences" },
       { name: "description", content: "Your favourite places and saved events on JAKAS." },
-      { property: "og:title", content: "Saved — JAKAS" },
+      { property: "og:title", content: "My JAKAS — Your saved experiences" },
       { property: "og:description", content: "Your favourite places and events." },
     ],
   }),
