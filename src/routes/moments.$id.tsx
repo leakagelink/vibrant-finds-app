@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { UserShell } from "@/components/jakas/UserShell";
 import { useStore } from "@/lib/store";
+import { isPublicHostMoment } from "@/lib/moment-visibility";
 
 export const Route = createFileRoute("/moments/$id")({
   head: ({ params }) => ({ meta: [
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/moments/$id")({
 
 function MomentDetails() {
   const { id } = Route.useParams();
-  const moment = useStore((s) => s.moments.find((m) => m.id === id && m.status === "approved" && m.hostType === "business"));
+  const moment = useStore((s) => s.moments.find((m) => m.id === id && isPublicHostMoment(m)));
   const share = async () => {
     if (!moment) return;
     try {

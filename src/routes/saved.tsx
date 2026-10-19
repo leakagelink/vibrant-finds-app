@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UserShell } from "@/components/jakas/UserShell";
 import { MomentCard } from "@/components/jakas/MomentCard";
 import { actions, useStore } from "@/lib/store";
+import { isPublicHostMoment } from "@/lib/moment-visibility";
 
 export const Route = createFileRoute("/saved")({
   head: () => ({
@@ -22,7 +23,7 @@ function Saved() {
   const saved = useStore((s) => s.saved);
   const places = useStore((s) => s.savedPlaces);
   const [p, setP] = useState("");
-  const list = moments.filter((m) => saved.includes(m.id));
+  const list = moments.filter((m) => saved.includes(m.id) && isPublicHostMoment(m));
   return (
     <UserShell title="Saved">
       <h3 className="mb-2 text-lg font-bold">Favourite places</h3>

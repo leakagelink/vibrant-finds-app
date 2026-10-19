@@ -4,6 +4,7 @@ import { Bookmark, Calendar, Flag, Heart, MapPin, MessageCircle, Send, Share2 } 
 import { toast } from "sonner";
 import { actions, useStore, type Moment } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export function MomentCard({ m }: { m: Moment }) {
   const liked = useStore((s) => s.liked.includes(m.id));
@@ -33,13 +34,13 @@ export function MomentCard({ m }: { m: Moment }) {
         <span className="absolute left-3 top-3 rounded-full bg-brand px-3 py-1 text-xs font-bold text-primary-foreground shadow-glow">
           {m.featured ? "★ Featured" : m.category}
         </span>
-        <button
-          aria-label="Save"
-          onClick={() => actions.toggleSave(m.id)}
+        <Button
+          variant="secondary" size="icon" disabled title="Phone verification is not connected"
+          aria-label="Interested unavailable"
           className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-card/90 backdrop-blur"
         >
           <Bookmark className={cn("h-4 w-4", saved && "fill-primary text-primary")} />
-        </button>
+        </Button>
       </div>
       <div className="space-y-2 p-4">
         <div className="flex items-start justify-between gap-2">
@@ -62,12 +63,12 @@ export function MomentCard({ m }: { m: Moment }) {
           <button onClick={share} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm hover:bg-muted">
             <Share2 className="h-4 w-4" />{m.shares}
           </button>
-          <button
-            onClick={() => { actions.report(m.id); toast("Reported. Our team will review it."); }}
-            className="ml-auto rounded-full p-2 text-muted-foreground hover:bg-muted" aria-label="Report"
+          <Button
+            variant="ghost" size="icon" disabled title="Phone verification is not connected"
+            className="ml-auto rounded-full p-2 text-muted-foreground hover:bg-muted" aria-label="Report unavailable"
           >
             <Flag className="h-4 w-4" />
-          </button>
+          </Button>
         </div>
         {open && (
           <div className="space-y-2 pt-1">

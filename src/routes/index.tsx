@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { UserShell } from "@/components/jakas/UserShell";
 import { MomentCard } from "@/components/jakas/MomentCard";
 import { actions, useStore } from "@/lib/store";
+import { isPublicHostMoment } from "@/lib/moment-visibility";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,7 +37,7 @@ function Home() {
   };
 
   const live = moments
-    .filter((m) => m.status === "approved" && m.hostType === "business" && (cat === "All" || m.category === cat))
+    .filter((m) => isPublicHostMoment(m) && (cat === "All" || m.category === cat))
     .sort((a, b) => a.distanceKm - b.distanceKm);
   const featured = live.filter((m) => m.featured);
 

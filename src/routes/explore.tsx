@@ -5,6 +5,7 @@ import { UserShell } from "@/components/jakas/UserShell";
 import { MomentCard } from "@/components/jakas/MomentCard";
 import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import { isPublicHostMoment } from "@/lib/moment-visibility";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
@@ -27,7 +28,7 @@ function Explore() {
   const [price, setPrice] = useState("All");
   const needle = q.toLowerCase();
   const results = moments.filter(
-    (m) => m.status === "approved" && m.hostType === "business" && m.distanceKm <= radius &&
+    (m) => isPublicHostMoment(m) && m.distanceKm <= radius &&
       (price === "All" || (price === "Free" ? m.price.toLowerCase() === "free" : m.price.toLowerCase() !== "free")) &&
       [m.title, m.location, m.category, m.host].some((x) => x.toLowerCase().includes(needle)),
   );
