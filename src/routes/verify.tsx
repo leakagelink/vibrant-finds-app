@@ -7,7 +7,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import { actions } from "@/lib/store";
 
 export const Route = createFileRoute("/verify")({
-  validateSearch: (s: Record<string, unknown>) => ({ phone: typeof s.phone === "string" ? s.phone.replace(/\D/g, "").slice(0, 10) : "" }),
+  validateSearch: (s: Record<string, unknown>) => ({ phone: typeof s["phone"] === "string" ? s["phone"].replace(/\D/g, "").slice(0, 10) : "" }),
   head: () => ({ meta: [
     { title: "Verify your number — JAKAS" },
     { name: "description", content: "Enter the one-time code to verify your phone on JAKAS." },
