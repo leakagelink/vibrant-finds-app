@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { UserRound } from "lucide-react";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { ProfileDrawer } from "./ProfileDrawer";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -12,14 +13,16 @@ const tabs = [
 
 export function UserShell({ children, title = "✨ Tonight looks exciting", subtitle = "Experiences near you", hideHeader = false, immersive = false, onLocationClick }: { children: ReactNode; title?: string; subtitle?: string; hideHeader?: boolean; immersive?: boolean; onLocationClick?: () => void }) {
   const { pathname } = useLocation();
+  const [drawer, setDrawer] = useState(false);
   return (
     <div className={cn("jakas-app mx-auto max-w-md bg-background md:border-x", immersive ? "discover-shell" : "pb-28")}>
       {!hideHeader && <header className="jakas-header grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 pb-3 pt-7">
         <div className="min-w-0"><h1 className="text-lg font-extrabold leading-tight">{title}</h1>{onLocationClick ? <Button variant="ghost" className="mt-1 h-auto justify-start p-0 text-xs font-medium text-muted-foreground" aria-label="Use Current Location" onClick={onLocationClick}>{subtitle}</Button> : <p className="mt-1 text-xs font-medium text-muted-foreground">{subtitle}</p>}</div>
-        <Link to="/profile" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-brand-orange bg-secondary text-secondary-foreground" aria-label="My profile">
+        <button type="button" onClick={() => setDrawer(true)} className="avatar-ring grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-brand-orange bg-secondary text-secondary-foreground" aria-label="My profile">
           <UserRound className="h-5 w-5 fill-brand-purple text-brand-purple" />
-        </Link>
+        </button>
       </header>}
+      {drawer && <ProfileDrawer onClose={() => setDrawer(false)} />}
       <main className={cn("px-4 py-1", immersive && "discover-main")}>{children}</main>
       <nav aria-label="Main navigation" className="jakas-nav fixed inset-x-5 z-40 mx-auto grid max-w-[408px] grid-cols-3 rounded-[28px] border bg-card/95 px-3 py-2 shadow-nav backdrop-blur">
         {tabs.map(({ to, label }) => {

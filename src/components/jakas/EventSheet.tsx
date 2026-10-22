@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { actions, useStore, type Moment } from "@/lib/store";
 import { formatCountdown, formatTime, getTiming } from "@/lib/moment-time";
 import * as Dialog from "@radix-ui/react-dialog";
+import { YoureIn } from "./YoureIn";
 
 export const categoryEmoji = (category: string) => ({ Food: "🍕", Music: "🎵", Coffee: "☕", Nightlife: "🍹", Wellness: "🌿", Tech: "💻", Sports: "⚽", Art: "🎨" }[category] ?? "✨");
 export const eventDate = (date: string) => new Date(`${date}T12:00:00+05:30`).toLocaleDateString("en-IN", { month: "short", day: "numeric", timeZone: "Asia/Kolkata" });
@@ -53,8 +54,13 @@ function Info({ icon, label, value, wide }: { icon: string; label: string; value
   </div>;
 }
 
-export function EventContent({ moment, withImage = false }: { moment: Moment; drop?: boolean; withImage?: boolean }) {
+export function EventContent({ moment, drop = false, withImage = false }: { moment: Moment; drop?: boolean; withImage?: boolean }) {
   const saved = useStore((s) => s.saved.includes(moment.id));
+  const liked = useStore((s) => s.liked.includes(moment.id));
+  const notified = useStore((s) => s.notified.includes(moment.id));
+  const [celebrate, setCelebrate] = useState(false);
+  const now = useNow();
+  const timing = getTiming(moment, now);
   const [terms, setTerms] = useState(false);
   const [viewer, setViewer] = useState<string | null>(null);
   const gallery = moment.gallery?.length ? moment.gallery : [moment.image];
@@ -75,11 +81,12 @@ export function EventContent({ moment, withImage = false }: { moment: Moment; dr
 
     <div className="my-5 grid grid-cols-4 gap-1 rounded-[20px] bg-muted px-2 py-3">
       <Stat emoji="👀" value={compact(moment.views)} label="Views" />
-      <Stat emoji="❤️" value={compact(moment.likes)} label="Likes" />
+      <button type="button" aria-pressed={liked} aria-label={liked ? "Unlike event" : "Like event"} onClick={() => actions.toggleLike(moment.id)} className={liked ? "like-pop rounded-2xl bg-brand-pink/10" : "rounded-2xl"}><Stat emoji={liked ? "❤️" : "🤍"} value={compact(moment.likes)} label={liked ? "Liked" : "Like"} /></button>
       <Stat emoji="🔥" value={compact(going)} label="Going" hot />
       <Stat emoji="📤" value={compact(moment.shares)} label="Shares" />
     </div>
 
+    {drop && timing.state !== "ended" && <div className="mb-5 flex items-center justify-between rounded-[20px] bg-brand-purple/10 px-4 py-3.5 text-brand-purple"><div><p className="text-[10px] font-bold tracking-widest">{timing.state === "live" ? "LIVE NOW" : "GOES LIVE IN"}</p><p className="text-2xl font-black tabular-nums">{formatCountdown(timing.seconds)}</p></div><span className="rocket-float text-3xl">🚀</span></div>}
     <h3 className="mb-2 text-base font-extrabold">About This Event</h3>
     <p className="text-sm leading-relaxed text-muted-foreground">{moment.description}</p>
 
@@ -109,11 +116,13 @@ export function EventContent({ moment, withImage = false }: { moment: Moment; dr
     </div>}
 
     <div className="sticky bottom-0 -mx-5 mt-5 flex items-center gap-2.5 border-t bg-card px-5 pb-5 pt-3">
-      <Button variant="action" className="h-14 flex-1 text-base" onClick={() => { if (!saved) { actions.interested(moment.id); toast.success("You're in! Added to My JAKAS ⭐"); } }}>{saved ? "✓ You're In" : "🔥 I'm In"}</Button>
+      {drop ? <Button variant={notified ? "outline" : "ink"} className={notified ? "h-14 flex-1 rounded-[20px] border-brand-purple text-base text-brand-purple" : "notify-pulse h-14 flex-1 rounded-[20px] bg-brand-purple text-base"} onClick={() => { actions.toggleNotify(moment.id); toast.success(notified ? "Reminder removed" : "We'll remind you when it goes live 🔔"); }}>{notified ? "✓ Reminder set" : "🔔 Notify Me"}</Button>
+        : <Button variant="action" className="h-14 flex-1 text-base" onClick={() => { if (!saved) actions.interested(moment.id); setCelebrate(true); }}>{saved ? "✓ You're In" : "🔥 I'm In"}</Button>}
       <Button variant="outline" className="h-14 flex-col gap-0 rounded-[18px] px-3 text-[10px]" onClick={() => shareEvent(moment)}><span className="text-base">📤</span>Share</Button>
       <Button asChild variant="outline" className="h-14 flex-col gap-0 rounded-[18px] px-3 text-[10px]"><a href={mapsUrl(moment.location)} target="_blank" rel="noopener noreferrer"><span className="text-base">📍</span>Directions</a></Button>
     </div>
 
+    {celebrate && <YoureIn moment={moment} onClose={() => setCelebrate(false)} />}
     {viewer && <Dialog.Root open onOpenChange={(o) => { if (!o) setViewer(null); }}><Dialog.Portal>
       <Dialog.Overlay className="event-backdrop fixed inset-0 z-[60] bg-foreground/90" />
       <Dialog.Content aria-describedby={undefined} className="fixed inset-0 z-[60] grid place-items-center p-4" onClick={() => setViewer(null)}>
@@ -124,7 +133,7 @@ export function EventContent({ moment, withImage = false }: { moment: Moment; dr
   </>;
 }
 
-export function EventSheet({ moment, onClose }: { moment: Moment; drop?: boolean; onClose: () => void }) {
+export function EventSheet({ moment, drop = false, onClose }: { moment: Moment; drop?: boolean; onClose: () => void }) {
   const [dy, setDy] = useState(0);
   const [start, setStart] = useState<number | null>(null);
   return <Dialog.Root open onOpenChange={(open) => { if (!open) onClose(); }}><Dialog.Portal>
@@ -136,7 +145,7 @@ export function EventSheet({ moment, onClose }: { moment: Moment; drop?: boolean
       </div>
       <Button autoFocus variant="ghost" size="icon" aria-label="Close event details" className="absolute right-3 top-1.5 z-10 h-7 w-7 rounded-full" onClick={onClose}><X /></Button>
       <div className="min-h-0 flex-1 overflow-y-auto px-5 [scrollbar-width:none]">
-        <EventContent moment={moment} />
+        <EventContent moment={moment} drop={drop} />
         <Button asChild variant="ghost" className="mb-2 w-full text-muted-foreground"><Link to="/moments/$id" params={{ id: moment.id }}>Open full page<ArrowRight /></Link></Button>
       </div>
     </Dialog.Content>

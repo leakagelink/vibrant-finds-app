@@ -217,3 +217,25 @@ h1, h2, h3 { font-weight: 800; letter-spacing: 0; }
 @keyframes live-pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive) 35%, transparent); } 50% { opacity: .5; box-shadow: 0 0 0 5px transparent; } }
 @keyframes hint-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes card-in { from { transform: scale(.95) translateY(10px); } }
+:root { --gradient-celebrate: linear-gradient(160deg, oklch(0.98 0.02 70), oklch(0.94 0.06 60) 40%, oklch(0.88 0.08 20)); }
+@utility bg-celebrate { background-image: var(--gradient-celebrate); }
+.youre-in { animation: sheet-enter 460ms cubic-bezier(.32,.72,0,1); }
+.confetti { opacity: .9; animation: confetti-fall 2s ease-in infinite; }
+.fire-glow { animation: fire-glow 2s ease-in-out infinite; }
+.fade-up { animation: fade-up 600ms ease both; }
+.drawer-in { animation: drawer-in 320ms cubic-bezier(.22,1,.36,1); }
+.avatar-ring { animation: avatar-ring 2.4s ease-in-out infinite; }
+.login-slide { animation: login-slide 360ms ease both; }
+.rocket-float { animation: rocket-float 2.4s ease-in-out infinite; }
+.notify-pulse { animation: purple-pulse 2s infinite; }
+.like-pop { animation: tab-pop 380ms ease; }
+.tab-fade { animation: fade-up 320ms ease both; }
+.otp-slot[data-active="true"] { animation: tab-pop 300ms ease; }
+@keyframes confetti-fall { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(380px) rotate(480deg) scale(.6); opacity: 0; } }
+@keyframes fire-glow { 0%,100% { transform: scale(1) rotate(-2deg); filter: drop-shadow(0 0 14px color-mix(in oklab, var(--brand-orange) 70%, transparent)); } 50% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 28px var(--brand-orange)); } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes drawer-in { from { opacity: 0; transform: translate(24px,-16px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes avatar-ring { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand-orange) 50%, transparent); } 50% { box-shadow: 0 0 0 7px transparent; } }
+@keyframes login-slide { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes rocket-float { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-8px) rotate(8deg); } }
+@keyframes purple-pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand-purple) 40%, transparent); } 50% { box-shadow: 0 0 0 8px transparent; } }

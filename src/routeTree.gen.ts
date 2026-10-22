@@ -18,6 +18,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 import { Route as AdminFeaturedRouteImport } from './routes/admin.featured'
@@ -74,6 +75,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -147,6 +153,7 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/saved': typeof SavedRoute
+  '/verify': typeof VerifyRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/featured': typeof AdminFeaturedRoute
   '/admin/hosts': typeof AdminHostsRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/saved': typeof SavedRoute
+  '/verify': typeof VerifyRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/featured': typeof AdminFeaturedRoute
   '/admin/hosts': typeof AdminHostsRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/saved': typeof SavedRoute
+  '/verify': typeof VerifyRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/featured': typeof AdminFeaturedRoute
   '/admin/hosts': typeof AdminHostsRoute
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/saved'
+    | '/verify'
     | '/admin/categories'
     | '/admin/featured'
     | '/admin/hosts'
@@ -238,6 +248,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/saved'
+    | '/verify'
     | '/admin/categories'
     | '/admin/featured'
     | '/admin/hosts'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/saved'
+    | '/verify'
     | '/admin/categories'
     | '/admin/featured'
     | '/admin/hosts'
@@ -285,6 +297,7 @@ export interface RootRouteChildren {
   NotificationsRoute: typeof NotificationsRoute
   ProfileRoute: typeof ProfileRoute
   SavedRoute: typeof SavedRoute
+  VerifyRoute: typeof VerifyRoute
   MomentsIdRoute: typeof MomentsIdRoute
 }
 
@@ -351,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/saved'
       fullPath: '/saved'
       preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -490,6 +510,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotificationsRoute: NotificationsRoute,
   ProfileRoute: ProfileRoute,
   SavedRoute: SavedRoute,
+  VerifyRoute: VerifyRoute,
   MomentsIdRoute: MomentsIdRoute,
 }
 export const routeTree = rootRouteImport
