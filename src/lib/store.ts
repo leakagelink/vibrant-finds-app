@@ -73,6 +73,8 @@ type State = {
   liked: string[];
   saved: string[];
   skipped: string[];
+  notified: string[];
+  demoPhone: string | null;
   savedPlaces: string[];
   hosts: Host[];
   users: AppUser[];
@@ -88,6 +90,8 @@ const initial: State = {
   liked: [],
   saved: [],
   skipped: [],
+  notified: [],
+  demoPhone: null,
   savedPlaces: [],
   hosts: seedHosts,
   users: seedUsers,
@@ -155,6 +159,9 @@ export const actions = {
     }),
   interested: (id: string) => setState((s) => ({ saved: s.saved.includes(id) ? s.saved : [...s.saved, id], skipped: s.skipped.filter((x) => x !== id) })),
   skip: (id: string) => setState((s) => ({ skipped: s.skipped.includes(id) ? s.skipped : [...s.skipped, id] })),
+  toggleNotify: (id: string) => setState((s) => ({ notified: toggle(s.notified, id) })),
+  demoSignIn: (phone: string) => setState(() => ({ demoPhone: phone })),
+  demoSignOut: () => setState(() => ({ demoPhone: null })),
   resetSkipped: () => setState(() => ({ skipped: [] })),
   toggleSave: (id: string) => setState((s) => ({ saved: toggle(s.saved, id) })),
   toggleSavePlace: (place: string) => setState((s) => ({ savedPlaces: toggle(s.savedPlaces, place) })),
