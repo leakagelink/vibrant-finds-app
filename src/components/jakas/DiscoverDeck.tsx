@@ -30,7 +30,7 @@ export function DiscoverDeck({ moments }: { moments: Moment[] }) {
     setDragging(false);
     if (drag.x < -90) decide("left");
     else if (drag.x > 90) decide("right");
-    else if (drag.y < -90) { setOpen(cur); setDrag({ x: 0, y: 0 }); }
+    else if (drag.y < -90) { setOpen(cur ?? null); setDrag({ x: 0, y: 0 }); }
     else setDrag({ x: 0, y: 0 });
   };
 
