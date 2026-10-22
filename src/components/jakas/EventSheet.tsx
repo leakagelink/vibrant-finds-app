@@ -31,7 +31,7 @@ export function useNow(ms = 1000) {
 export function TimingBadge({ moment, onPhoto = false }: { moment: Moment; onPhoto?: boolean }) {
   const now = useNow();
   const t = getTiming(moment, now);
-  const label = t.state === "live" ? "LIVE" : t.state === "soon" ? "STARTING SOON" : t.state === "ended" ? "ENDED" : "LATER";
+  const label = t.state === "live" ? "LIVE" : t.state === "soon" ? "STARTING SOON" : t.state === "ended" ? "ENDED" : "STARTS IN";
   return <div className="flex items-center gap-2">
     <span className={onPhoto ? "flex items-center gap-1.5 rounded-full bg-photo-overlay px-3 py-1.5 text-[11px] font-bold tracking-widest text-primary-foreground backdrop-blur" : "flex items-center gap-1.5 rounded-full bg-destructive/10 px-3 py-1.5 text-[11px] font-bold tracking-widest text-destructive"}>
       {t.state === "live" && <span className="live-dot" />}{label}

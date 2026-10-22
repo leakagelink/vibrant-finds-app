@@ -23,6 +23,6 @@ function MomentDetails() {
   const moment = useStore((s) => s.moments.find((m) => m.id === id && isPublicHostMoment(m)));
   return <UserShell title="Event details" subtitle="An experience worth heading out for">
     <Button asChild variant="ghost" className="mb-3 text-xs"><Link to="/"><ArrowLeft />Back to Discover</Link></Button>
-    {!moment ? <div className="py-12 text-center"><h2 className="text-2xl font-bold">Event unavailable</h2><p className="mt-2 text-muted-foreground">This event is not available for viewing.</p></div> : <EventContent moment={moment} />}
+    {!moment ? <div className="py-12 text-center"><h2 className="text-2xl font-bold">Event unavailable</h2><p className="mt-2 text-muted-foreground">This event is not available for viewing.</p></div> : <EventContent moment={moment} withImage />}
   </UserShell>;
 }

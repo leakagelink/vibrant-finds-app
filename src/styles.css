@@ -207,3 +207,13 @@ h1, h2, h3 { font-weight: 800; letter-spacing: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+.swipe-card { position: absolute; overflow: hidden; border-radius: 30px; background: var(--foreground); }
+.swipe-card-back { inset: 8px 12px 0; transform: scale(.95) translateY(10px); transform-origin: bottom center; box-shadow: var(--shadow-nav); }
+.swipe-card-front { inset: 0 0 4px; z-index: 2; cursor: grab; touch-action: none; user-select: none; will-change: transform; box-shadow: 0 12px 34px oklch(0.2 0.01 285 / 18%); animation: card-in 380ms ease both; }
+.swipe-card-front:active { cursor: grabbing; }
+.swipe-stamp { position: absolute; top: 64px; z-index: 3; pointer-events: none; border-width: 2px; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 800; letter-spacing: .08em; background: var(--photo-overlay); backdrop-filter: blur(10px); }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--destructive); animation: live-pulse 1.5s infinite; }
+.swipe-hint { animation: hint-bob 1.8s ease-in-out infinite; }
+@keyframes live-pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive) 35%, transparent); } 50% { opacity: .5; box-shadow: 0 0 0 5px transparent; } }
+@keyframes hint-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes card-in { from { transform: scale(.95) translateY(10px); } }
